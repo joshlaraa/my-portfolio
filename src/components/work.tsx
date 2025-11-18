@@ -6,14 +6,31 @@ const projects = [
     title: "SKALE",
     description:
       "Building the future of engineering at CSUSM through innovation, community, and applied learning.",
-    tags: ["Shadcn", "React", "Next.js"],
-    image: "/skale.png",
+    tags: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "TailwindCSS",
+      "Shadcn",
+      "GitHub",
+      "Git",
+      "Prettier",
+    ],
+    image: "/skalev2.png",
   },
   {
     title: "Google Development Studio Club",
     description:
       "We are dedicated to enhancing systems through collaborative projects. Our mission is to advance CSUSM and the surrounding community using Software.",
-    tags: ["Design", "Development", "Branding"],
+    tags: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "TailwindCSS",
+      "Shadcn",
+      "React-Router-Dom",
+      "React-Query",
+    ],
     image: "/gdsc.png",
   },
   {
@@ -88,16 +105,13 @@ function ProjectCard({
   index: number;
 }) {
   const [ref, isInView] = useInView();
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
       ref={ref}
-      className={`group cursor-pointer transition-all duration-1000 ${
+      className={`transition-all duration-1000 ${
         isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div className={`space-y-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
@@ -135,14 +149,90 @@ function ProjectCard({
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-4 py-2 text-sm bg-secondary rounded-full text-secondary-foreground"
-              >
-                {tag}
-              </span>
-            ))}
+            {project.tags.map((tag) => {
+              const key = tag.toLowerCase().replace(/[^a-z0-9]/g, "");
+              const tagStyles: Record<string, string> = {
+                react:
+                  "bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/40",
+                typescript:
+                  "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                vite: "bg-violet-50 text-violet-700 hover:bg-violet-100 hover:text-violet-800 dark:bg-violet-900/28 dark:text-violet-300 dark:hover:bg-violet-800/36",
+                tailwindcss:
+                  "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-900/28 dark:text-cyan-300 dark:hover:bg-cyan-800/36",
+                tailwind:
+                  "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-900/28 dark:text-cyan-300 dark:hover:bg-cyan-800/36",
+                shadcn:
+                  "bg-purple-50 text-purple-700 hover:bg-purple-100 hover:text-purple-800 dark:bg-purple-900/28 dark:text-purple-300 dark:hover:bg-purple-800/36",
+                design:
+                  "bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 dark:bg-rose-900/28 dark:text-rose-300 dark:hover:bg-rose-800/36",
+                development:
+                  "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                branding:
+                  "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 dark:bg-emerald-900/28 dark:text-emerald-300 dark:hover:bg-emerald-800/36",
+                nextjs:
+                  "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
+                github:
+                  "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
+                git: "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                prettier:
+                  "bg-fuchsia-50 text-fuchsia-700 hover:bg-fuchsia-100 hover:text-fuchsia-800 dark:bg-fuchsia-900/28 dark:text-fuchsia-300 dark:hover:bg-fuchsia-800/36",
+                reactrouterdom:
+                  "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-800 dark:bg-indigo-900/28 dark:text-indigo-300 dark:hover:bg-indigo-800/36",
+                reactquery:
+                  "bg-teal-50 text-teal-700 hover:bg-teal-100 hover:text-teal-800 dark:bg-teal-900/28 dark:text-teal-300 dark:hover:bg-teal-800/36",
+                axios:
+                  "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                graphql:
+                  "bg-pink-50 text-pink-700 hover:bg-pink-100 hover:text-pink-800 dark:bg-pink-900/28 dark:text-pink-300 dark:hover:bg-pink-800/36",
+                prisma:
+                  "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-900/28 dark:text-cyan-300 dark:hover:bg-cyan-800/36",
+                postgres:
+                  "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                sqlite:
+                  "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                node: "bg-lime-50 text-lime-700 hover:bg-lime-100 hover:text-lime-800 dark:bg-lime-900/28 dark:text-lime-300 dark:hover:bg-lime-800/36",
+                express:
+                  "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
+                npm: "bg-red-50 text-red-700 hover:bg-red-100 hover:text-red-800 dark:bg-red-900/28 dark:text-red-300 dark:hover:bg-red-800/36",
+                yarn: "bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-800/40",
+                docker:
+                  "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                kubernetes:
+                  "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-800 dark:bg-indigo-900/28 dark:text-indigo-300 dark:hover:bg-indigo-800/36",
+                jest: "bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 dark:bg-rose-900/28 dark:text-rose-300 dark:hover:bg-rose-800/36",
+                playwright:
+                  "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-800 dark:bg-indigo-900/28 dark:text-indigo-300 dark:hover:bg-indigo-800/36",
+                cypress:
+                  "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 dark:bg-emerald-900/28 dark:text-emerald-300 dark:hover:bg-emerald-800/36",
+                eslint:
+                  "bg-lime-50 text-lime-700 hover:bg-lime-100 hover:text-lime-800 dark:bg-lime-900/28 dark:text-lime-300 dark:hover:bg-lime-800/36",
+                mongodb:
+                  "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 dark:bg-emerald-900/28 dark:text-emerald-300 dark:hover:bg-emerald-800/36",
+                firebase:
+                  "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                supabase:
+                  "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 dark:bg-emerald-900/28 dark:text-emerald-300 dark:hover:bg-emerald-800/36",
+                storybook:
+                  "bg-red-50 text-red-700 hover:bg-red-100 hover:text-red-800 dark:bg-red-900/28 dark:text-red-300 dark:hover:bg-red-800/36",
+                javascript:
+                  "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                html: "bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 dark:bg-rose-900/28 dark:text-rose-300 dark:hover:bg-rose-800/36",
+                css: "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                default:
+                  "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-foreground",
+              };
+
+              const classes = tagStyles[key] || tagStyles.default;
+
+              return (
+                <span
+                  key={tag}
+                  className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 border border-transparent ${classes}`}
+                >
+                  {tag}
+                </span>
+              );
+            })}
           </div>
           <div
             className={`pt-4 transition-all duration-700 ${
@@ -154,13 +244,9 @@ function ProjectCard({
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            <button className="inline-flex items-center gap-2 text-accent transition-all group-hover:gap-4 duration-300">
+            <button className="inline-flex items-center gap-2 text-foreground hover:text-accent transition-colors duration-200 group">
               <span className="text-sm font-medium">View project</span>
-              <ArrowUpRight
-                className={`w-4 h-4 transition-transform duration-300 ${
-                  isHovered ? "rotate-45" : ""
-                }`}
-              />
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" />
             </button>
           </div>
         </div>
@@ -173,19 +259,13 @@ function ProjectCard({
           }`}
           style={{ transitionDelay: "300ms" }}
         >
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:shadow-2xl">
+          <div className="relative rounded-2xl overflow-hidden bg-white/95 dark:bg-slate-800 border border-border/50 dark:border-border/20 shadow-sm dark:shadow-none transition-transform duration-300 ease-out hover:scale-[1.02] hover:shadow-md cursor-pointer">
             <img
               src={project.image || "/placeholder.svg"}
               alt={project.title}
-              className={`w-full h-full object-cover transition-transform duration-700 ${
-                isHovered ? "scale-110" : "scale-100"
-              }`}
+              className="w-full h-[220px] md:h-[300px] lg:h-[340px] object-cover block transition-transform duration-300"
             />
-            <div
-              className={`absolute inset-0 bg-accent/5 transition-opacity duration-500 ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
-            />
+            <div className="absolute inset-0 bg-accent/5 dark:bg-accent/5 transition-opacity duration-500 opacity-0 hover:opacity-100 pointer-events-none" />
           </div>
         </div>
       </div>

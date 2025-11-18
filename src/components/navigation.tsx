@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,6 +47,11 @@ export function Navigation() {
             JL
           </button>
           <div className="flex items-center gap-6 lg:gap-10">
+            <AnimatedThemeToggler
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors duration-200"
+              aria-label="Toggle theme"
+            />
+
             {[
               { id: "work", label: "Work" },
               { id: "about", label: "About" },
