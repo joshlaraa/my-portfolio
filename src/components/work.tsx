@@ -34,10 +34,21 @@ const projects = [
     image: "/gdsc.png",
   },
   {
-    title: "Project #3",
-    description: "Project #3 description.",
-    tags: ["Tag #1", "Tag #2", "Tag #3"],
-    image: "",
+    title: "Melo Music Streaming",
+    description:
+      "A music streaming application for discovering and enjoying music.",
+    tags: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "TailwindCSS",
+      "React-Router-Dom",
+      "React-Query",
+      "AWS",
+      "Go",
+      "Supabase",
+    ],
+    image: "/melo.png",
   },
 ];
 
@@ -174,6 +185,7 @@ function ProjectCard({
                 github:
                   "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
                 git: "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
+                aws: "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
                 prettier:
                   "bg-fuchsia-50 text-fuchsia-700 hover:bg-fuchsia-100 hover:text-fuchsia-800 dark:bg-fuchsia-900/28 dark:text-fuchsia-300 dark:hover:bg-fuchsia-800/36",
                 reactrouterdom:
