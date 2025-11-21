@@ -198,11 +198,11 @@ function ProjectCard({
         </div>
 
         <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-          <div className="relative rounded-2xl overflow-hidden bg-white/95 dark:bg-slate-800 border border-border/50 dark:border-border/20 shadow-sm dark:shadow-none cursor-pointer">
+          <div className="relative rounded-2xl overflow-hidden bg-white/95 dark:bg-slate-800 shadow-sm dark:shadow-none transition-transform duration-300 ease-out hover:scale-[1.02] hover:shadow-md">
             <img
               src={project.image || "/placeholder.svg"}
               alt={project.title}
-              className="w-full h-[220px] md:h-[300px] lg:h-[340px] object-cover block"
+              className="w-full h-[220px] md:h-[300px] lg:h-[340px] object-cover block transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-accent/5 dark:bg-accent/5 opacity-0 pointer-events-none" />
           </div>

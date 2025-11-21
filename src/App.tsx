@@ -1,6 +1,7 @@
 import { Hero } from "./components/hero";
 import { Navigation } from "./components/navigation";
 import { Work } from "./components/work";
+import { About } from "./components/about";
 import { DotPattern } from "./components/ui/dot-pattern";
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Hero />
       <Navigation />
       <Work />
+      <About />
     </div>
   );
 }
