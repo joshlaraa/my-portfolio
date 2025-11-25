@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="relative min-h-screen">
       <DotPattern className="opacity-30" />
-      <Hero />
       <Navigation />
+      <Hero />
       <Work />
       <About />
       <Contact />

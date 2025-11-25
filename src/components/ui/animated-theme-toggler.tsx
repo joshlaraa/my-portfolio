@@ -11,7 +11,7 @@ interface AnimatedThemeTogglerProps
 
 export const AnimatedThemeToggler = ({
   className,
-  duration = 400,
+  duration = 700,
   ...props
 }: AnimatedThemeTogglerProps) => {
   const [isDark, setIsDark] = useState(
@@ -94,10 +94,24 @@ export const AnimatedThemeToggler = ({
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className)}
+      className={cn(
+        className,
+        "transition-transform duration-150 ease-in-out active:scale-95",
+        isDark && "text-foreground"
+      )}
       {...props}
     >
-      {isDark ? <Sun /> : <Moon />}
+      {isDark ? (
+        <Sun
+          className="w-4 h-4 transform"
+          style={{ transitionDuration: `${duration}ms` }}
+        />
+      ) : (
+        <Moon
+          className="w-4 h-4 transform"
+          style={{ transitionDuration: `${duration}ms` }}
+        />
+      )}
       <span className="sr-only">Toggle theme</span>
     </button>
   );
