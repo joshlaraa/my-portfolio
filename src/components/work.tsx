@@ -17,6 +17,7 @@ const projects = [
       "Prettier",
     ],
     image: "/skalev2.png",
+    url: "https://skale-csusm.netlify.app/",
   },
   {
     title: "Google Development Student Club",
@@ -32,6 +33,7 @@ const projects = [
       "React-Query",
     ],
     image: "/gdsc.png",
+    url: "https://github.com/csusmGDSC",
   },
   {
     title: "Melo Music Streaming",
@@ -49,6 +51,7 @@ const projects = [
       "Supabase",
     ],
     image: "/melo.png",
+    url: "https://github.com/melosong-music/frontend",
   },
 ];
 
@@ -190,10 +193,19 @@ function ProjectCard({
             })}
           </div>
           <div className="pt-4">
-            <button className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground group">
+            <a
+              href={project.url || "#"}
+              target={project.url && project.url !== "#" ? "_blank" : undefined}
+              rel={
+                project.url && project.url !== "#"
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground group"
+            >
               <span className="text-sm font-medium">View project</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45" />
-            </button>
+            </a>
           </div>
         </div>
 

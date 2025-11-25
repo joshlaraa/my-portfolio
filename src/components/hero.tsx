@@ -11,7 +11,7 @@ export function Hero() {
 
       <div className="max-w-5xl mx-auto text-center space-y-8 py-32">
         <p className="text-muted-foreground text-sm lg:text-base tracking-wide">
-          Hey there, I'm Josh 👋!
+          Hey there, I'm Josh Lara 👋🏽
         </p>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold text-balance leading-[1.1] tracking-tight">
           Full Stack Developer

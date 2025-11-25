@@ -68,7 +68,7 @@ export function Navigation() {
               >
                 {item.label}
                 {activeSection === item.id && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent animate-in fade-in zoom-in duration-300" />
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500 animate-in fade-in zoom-in duration-300" />
                 )}
               </button>
             ))}

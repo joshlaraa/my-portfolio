@@ -2,6 +2,7 @@ import { Hero } from "./components/hero";
 import { Navigation } from "./components/navigation";
 import { Work } from "./components/work";
 import { About } from "./components/about";
+import { Contact } from "./components/contact";
 import { DotPattern } from "./components/ui/dot-pattern";
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navigation />
       <Work />
       <About />
+      <Contact />
     </div>
   );
 }
