@@ -43,7 +43,7 @@ export function Contact() {
                 },
                 {
                   label: "Resume",
-                  handle: "2025 Version",
+                  handle: "2026 Version",
                   url: "/JoshLaraResume.pdf",
                 },
               ].map((social) => (

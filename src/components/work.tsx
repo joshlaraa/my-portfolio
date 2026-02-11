@@ -20,6 +20,30 @@ const projects = [
     url: "https://skale-csusm.netlify.app/",
   },
   {
+    title: "Project Xplain",
+    description:
+      "A desktop application that uses LLMs and X-ray image data to generate interactive, educational explanations for my senor capstone project.",
+    tags: ["Python", "PySide6", "AWS", "LaTeX", "CSS", "HTML", "GitHub", "Git"],
+    image: "/project-xplain.png",
+    url: "https://github.com/creativeelectron",
+  },
+  {
+    title: "JL Auto Detail",
+    description:
+      "A responsive business website built to showcase services and generate customer leads for my father's auto detailing company.",
+    tags: [
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Nextjs",
+      "Shadcn",
+      "GitHub",
+      "Git",
+    ],
+    image: "/jlautodetail.png",
+    url: "https://www.jlautodetail.com/",
+  },
+  {
     title: "Google Development Student Club",
     description:
       "We are dedicated to enhancing systems through collaborative projects. Our mission is to advance CSUSM and the surrounding community using Software.",
@@ -66,7 +90,7 @@ function useInView(options = {}) {
           setIsInView(true);
         }
       },
-      { threshold: 0.1, ...options }
+      { threshold: 0.1, ...options },
     );
 
     if (ref.current) {
@@ -145,7 +169,7 @@ function ProjectCard({
                 branding:
                   "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:text-emerald-800 dark:bg-emerald-900/28 dark:text-emerald-300 dark:hover:bg-emerald-800/36",
                 nextjs:
-                  "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
+                  "bg-green-50 text-green-800 hover:bg-green-100 hover:text-green-900 dark:bg-green-800/30 dark:text-green-200 dark:hover:bg-green-700/36",
                 github:
                   "bg-neutral-50 text-neutral-800 hover:bg-neutral-100 hover:text-neutral-900 dark:bg-neutral-800/30 dark:text-neutral-200 dark:hover:bg-neutral-700/36",
                 git: "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
@@ -158,6 +182,10 @@ function ProjectCard({
                   "bg-teal-50 text-teal-700 hover:bg-teal-100 hover:text-teal-800 dark:bg-teal-900/28 dark:text-teal-300 dark:hover:bg-teal-800/36",
                 prisma:
                   "bg-cyan-50 text-cyan-700 hover:bg-cyan-100 hover:text-cyan-800 dark:bg-cyan-900/28 dark:text-cyan-300 dark:hover:bg-cyan-800/36",
+                python:
+                  "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
+                pyside6:
+                  "bg-green-50 text-green-700 hover:bg-green-100 hover:text-green-800 dark:bg-green-900/28 dark:text-green-300 dark:hover:bg-green-800/36",
                 postgres:
                   "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
                 sqlite:
@@ -175,6 +203,8 @@ function ProjectCard({
                 javascript:
                   "bg-amber-50 text-amber-700 hover:bg-amber-100 hover:text-amber-800 dark:bg-amber-900/28 dark:text-amber-300 dark:hover:bg-amber-800/36",
                 html: "bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 dark:bg-rose-900/28 dark:text-rose-300 dark:hover:bg-rose-800/36",
+                latex:
+                  "bg-red-50 text-red-700 hover:bg-red-100 hover:text-red-800 dark:bg-red-900/28 dark:text-red-300 dark:hover:bg-red-800/36",
                 css: "bg-sky-50 text-sky-700 hover:bg-sky-100 hover:text-sky-800 dark:bg-sky-900/28 dark:text-sky-300 dark:hover:bg-sky-800/36",
                 default:
                   "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-foreground",
