@@ -1,6 +1,6 @@
 import { ArrowDown } from "lucide-react";
 
-const SECTIONS = ["hero", "work", "about", "contact"];
+const SECTIONS = ["hero", "about", "work", "contact"];
 
 export function Hero() {
   const scrollToNextSection = () => {
@@ -13,7 +13,13 @@ export function Hero() {
       }
     });
     const nextId = SECTIONS[Math.min(currentIndex + 1, SECTIONS.length - 1)];
-    document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth" });
+    const nextElement = document.getElementById(nextId);
+    if (!nextElement) return;
+
+    const NAV_OFFSET = -100;
+    const top =
+      nextElement.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (

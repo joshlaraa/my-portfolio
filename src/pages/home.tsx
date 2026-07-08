@@ -9,8 +9,8 @@ export function Home() {
     <>
       <Navigation />
       <Hero />
-      <Work />
       <About />
+      <Work />
       <Contact />
     </>
   );
