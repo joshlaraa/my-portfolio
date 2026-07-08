@@ -51,17 +51,12 @@ export function About() {
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
                 {
-                  "I'm Josh, an aspiring Software Engineer based in San Diego, CA. Currently, I'm a senior at California State University San Marcos, where I am preparing to make a meaningful impact in the industry."
+                  "I'm Josh, a curious engineer based in San Diego, CA. As a recent graduate of California State University San Marcos, I helped raise over $160k for student innovation and led technical clubs and cultural organizations like Society of Hispanic Professional Engineers and Society of Asian Scientists and Engineers."
                 }
               </p>
               <p>
-                I have both industry and project experience building
-                applications and having ownership of products from start to
-                finish.
-              </p>
-              <p>
                 {
-                  "I contributed to several impactful initiatives, including reducing Honeywell software setup time from hours to minutes using DDCI tools, helping raise over $120k for student innovation, and coordinating team travel to national conventions to showcase my school’s talent."
+                  "Across two internships, including Honeywell Aerospace, I've shipped real products end to end, from cutting software setup time to minutes to building applications with full ownership."
                 }
               </p>
             </div>
@@ -107,12 +102,12 @@ export function About() {
                   {
                     title: "Founder",
                     org: "Student Knowledge and Applied Learning in Engineering",
-                    period: "2024 — Present",
+                    period: "2024 — 2026",
                   },
                   {
                     title: "Treasurer",
                     org: "Society of Hispanic Professional Engineers",
-                    period: "2023 — Present",
+                    period: "2023 — 2026",
                   },
                 ].map((role, i) => (
                   <div key={i} className="space-y-2">

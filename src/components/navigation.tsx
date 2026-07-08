@@ -55,76 +55,68 @@ export function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <button
-            onClick={() => scrollToSection("hero")}
-            className="text-base lg:text-lg font-medium text-foreground hover:opacity-70 transition-all duration-300"
-          ></button>
+    <nav className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-[max(1rem,env(safe-area-inset-top))]">
+      <TooltipProvider>
+        <Dock
+          direction="middle"
+          className="mt-0 min-w-0 gap-2 px-3 sm:min-w-[500px] sm:gap-10 sm:px-6"
+        >
+          {DATA.navbar.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = activeSection === id;
 
-          <div className="flex-1 flex items-center justify-center">
-            <TooltipProvider>
-              <Dock direction="middle">
-                {DATA.navbar.map((item) => {
-                  const id = item.href.replace("#", "");
-                  const isActive = activeSection === id;
+            return (
+              <DockIcon key={item.label}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={item.href}
+                      aria-label={item.label}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveSection(id);
+                        scrollToSection(id);
+                      }}
+                      className={cn(
+                        "flex items-center justify-center w-full h-full rounded-full relative",
+                        isActive
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      <item.icon className="w-4 h-4" />
+                      {isActive && (
+                        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500" />
+                      )}
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{item.label}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+            );
+          })}
+          <Separator orientation="vertical" className="h-full" />
 
-                  return (
-                    <DockIcon key={item.label}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <a
-                            href={item.href}
-                            aria-label={item.label}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setActiveSection(id);
-                              scrollToSection(id);
-                            }}
-                            className={cn(
-                              "flex items-center justify-center w-full h-full rounded-full relative",
-                              isActive
-                                ? "text-foreground"
-                                : "text-muted-foreground hover:text-foreground"
-                            )}
-                          >
-                            <item.icon className="w-4 h-4" />
-                            {isActive && (
-                              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500" />
-                            )}
-                          </a>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{item.label}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </DockIcon>
-                  );
-                })}
-                <Separator orientation="vertical" className="h-full" />
-
-                <DockIcon key="theme-toggler">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div
-                        className={cn(
-                          "flex items-center justify-center w-full h-full rounded-full relative text-muted-foreground hover:text-foreground"
-                        )}
-                      >
-                        <AnimatedThemeToggler
-                          className="flex items-center justify-center w-full h-full"
-                          aria-label="Toggle theme"
-                        />
-                      </div>
-                    </TooltipTrigger>
-                  </Tooltip>
-                </DockIcon>
-              </Dock>
-            </TooltipProvider>
-          </div>
-        </div>
-      </div>
+          <DockIcon key="theme-toggler">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  className={cn(
+                    "flex items-center justify-center w-full h-full rounded-full relative text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <AnimatedThemeToggler
+                    className="flex items-center justify-center w-full h-full"
+                    aria-label="Toggle theme"
+                  />
+                </div>
+              </TooltipTrigger>
+            </Tooltip>
+          </DockIcon>
+        </Dock>
+      </TooltipProvider>
     </nav>
   );
 }

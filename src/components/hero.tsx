@@ -14,10 +14,10 @@ export function Hero() {
           Hey there, I'm Josh Lara 👋🏽
         </p>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold text-balance leading-[1.1] tracking-tight">
-          Full Stack Developer
+          Software Engineer
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto text-pretty">
-          A rising senior at California State University San Marcos, majoring in
+          A recent graduate from California State University San Marcos, majored in
           Software Engineering. Passionate about building applications that
           leave an impact on today's world.
         </p>

@@ -22,41 +22,26 @@ export const AnimatedThemeToggler = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const updateTheme = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
+    setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return;
 
-    const doToggle = () => {
+    const applyTheme = () => {
       flushSync(() => {
-        const newTheme = !isDark;
-        setIsDark(newTheme);
-        document.documentElement.classList.toggle("dark");
-        localStorage.setItem("theme", newTheme ? "dark" : "light");
+        const dark = document.documentElement.classList.toggle("dark");
+        setIsDark(dark);
+        localStorage.setItem("theme", dark ? "dark" : "light");
       });
     };
 
-    if (typeof (document as any).startViewTransition === "function") {
-      await (document as any).startViewTransition(() => {
-        doToggle();
-      }).ready;
-    } else {
-      // Fallback for browsers without startViewTransition
-      doToggle();
+    if (typeof (document as any).startViewTransition !== "function") {
+      applyTheme();
+      return;
     }
+
+    await (document as any).startViewTransition(applyTheme).ready;
 
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect();
@@ -67,50 +52,32 @@ export const AnimatedThemeToggler = ({
       Math.max(top, window.innerHeight - top)
     );
 
-    // Reveal animation (works with or without view transitions)
-    try {
-      (document.documentElement as any).animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${maxRadius}px at ${x}px ${y}px)`,
-          ],
-        },
-        {
-          duration,
-          easing: "ease-in-out",
-          // When view transitions are available, this targets the new root pseudo-element
-          pseudoElement: (document as any).startViewTransition
-            ? "::view-transition-new(root)"
-            : undefined,
-        }
-      );
-    } catch (e) {
-      // ignore animation errors on older browsers
-    }
-  }, [isDark, duration]);
+    document.documentElement.animate(
+      {
+        clipPath: [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${maxRadius}px at ${x}px ${y}px)`,
+        ],
+      },
+      {
+        duration,
+        easing: "ease-in-out",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }, [duration]);
 
   return (
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(
-        className,
-        "transition-transform duration-150 ease-in-out active:scale-95",
-        isDark && "text-foreground"
-      )}
+      className={cn(className, isDark && "text-foreground")}
       {...props}
     >
       {isDark ? (
-        <Sun
-          className="w-4 h-4 transform"
-          style={{ transitionDuration: `${duration}ms` }}
-        />
+        <Sun className="w-4 h-4" />
       ) : (
-        <Moon
-          className="w-4 h-4 transform"
-          style={{ transitionDuration: `${duration}ms` }}
-        />
+        <Moon className="w-4 h-4" />
       )}
       <span className="sr-only">Toggle theme</span>
     </button>

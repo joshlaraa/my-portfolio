@@ -70,7 +70,7 @@ export function Contact() {
 
         <footer className="mt-20 pt-12 border-t border-border">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© 2025. Designed by Josh Lara</p>
+            <p> &copy;<time dateTime={String(new Date().getFullYear())}>{new Date().getFullYear()}</time> Designed and built by Josh Lara</p>
             <div className="flex items-center gap-6">
               <a
                 href="#"
