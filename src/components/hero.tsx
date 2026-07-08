@@ -1,4 +1,21 @@
+import { ArrowDown } from "lucide-react";
+
+const SECTIONS = ["hero", "work", "about", "contact"];
+
 export function Hero() {
+  const scrollToNextSection = () => {
+    const scrollPosition = window.scrollY + 100;
+    let currentIndex = 0;
+    SECTIONS.forEach((id, index) => {
+      const element = document.getElementById(id);
+      if (element && element.offsetTop <= scrollPosition) {
+        currentIndex = index;
+      }
+    });
+    const nextId = SECTIONS[Math.min(currentIndex + 1, SECTIONS.length - 1)];
+    document.getElementById(nextId)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="hero"
@@ -22,6 +39,14 @@ export function Hero() {
           leave an impact on today's world.
         </p>
       </div>
+
+      <button
+        onClick={scrollToNextSection}
+        aria-label="Scroll to next section"
+        className="supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 absolute bottom-8 right-6 lg:bottom-10 lg:right-12 z-40 flex h-12 w-12 items-center justify-center rounded-2xl border text-muted-foreground backdrop-blur-md transition-all duration-300 hover:text-foreground active:scale-95"
+      >
+        <ArrowDown className="h-4 w-4" />
+      </button>
     </section>
   );
 }

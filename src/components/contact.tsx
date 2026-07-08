@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Contact() {
   return (
     <section id="contact" className="pt-32 pb-16 px-6 lg:px-12">
@@ -72,18 +74,18 @@ export function Contact() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
             <p> &copy;<time dateTime={String(new Date().getFullYear())}>{new Date().getFullYear()}</time> Designed and built by Josh Lara</p>
             <div className="flex items-center gap-6">
-              <a
-                href="#"
+              <Link
+                to="/privacy"
                 className="hover:text-foreground transition-colors duration-300"
               >
                 Privacy
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/terms"
                 className="hover:text-foreground transition-colors duration-300"
               >
                 Terms
-              </a>
+              </Link>
             </div>
           </div>
         </footer>
