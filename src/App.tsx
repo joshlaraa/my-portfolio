@@ -1,33 +1,52 @@
-import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { DotPattern } from "./components/ui/dot-pattern";
-import { Home } from "./pages/home";
-import { Privacy } from "./pages/privacy";
-import { Terms } from "./pages/terms";
-import { NotFound } from "./pages/not-found";
-import { inject } from "@vercel/analytics";
+import { lazy, Suspense, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router";
+import { Analytics } from "@vercel/analytics/react";
 
-inject();
+import { DotPattern } from "@/components/ui/dot-pattern";
+import { Home } from "@/pages/home";
 
-function ScrollToTop() {
+const Privacy = lazy(() =>
+  import("@/pages/privacy").then((m) => ({ default: m.Privacy })),
+);
+const Terms = lazy(() =>
+  import("@/pages/terms").then((m) => ({ default: m.Terms })),
+);
+const NotFound = lazy(() =>
+  import("@/pages/not-found").then((m) => ({ default: m.NotFound })),
+);
+
+function ScrollManager() {
   const { pathname } = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const hashTarget = window.location.hash
+      ? document.getElementById(window.location.hash.slice(1))
+      : null;
+
+    if (hashTarget) {
+      hashTarget.scrollIntoView();
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   }, [pathname]);
+
   return null;
 }
 
 function App() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-dvh">
       <DotPattern className="opacity-30" />
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ScrollManager />
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+      <Analytics />
     </div>
   );
 }

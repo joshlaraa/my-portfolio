@@ -1,27 +1,29 @@
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
+import { EMAIL } from "@/data/portfolio";
 
 export function Terms() {
   return (
     <LegalLayout title="Terms of Use" updated="July 8, 2026">
       <p>
-        By accessing and using this portfolio website, you agree to the following
-        terms. If you do not agree with these terms, please do not use the site.
+        By accessing and using this portfolio website, you agree to the
+        following terms. If you do not agree with these terms, please do not use
+        the site.
       </p>
 
       <LegalSection heading="Use of this site">
         <p>
-          This website is provided for informational purposes to showcase my work
-          and background. You are welcome to browse the content freely. You agree
-          not to use the site in any way that could damage, disable, or impair its
-          functionality.
+          This website is provided for informational purposes to showcase my
+          work and background. You are welcome to browse the content freely. You
+          agree not to use the site in any way that could damage, disable, or
+          impair its functionality.
         </p>
       </LegalSection>
 
       <LegalSection heading="Accuracy of information">
         <p>
-          I do my best to keep the information on this site current and accurate,
-          but I make no guarantees that it is complete or up to date at all times.
-          Content may change without notice.
+          I do my best to keep the information on this site current and
+          accurate, but I make no guarantees that it is complete or up to date
+          at all times. Content may change without notice.
         </p>
       </LegalSection>
 
@@ -45,10 +47,10 @@ export function Terms() {
         <p>
           Questions about these terms? Reach out at{" "}
           <a
-            href="mailto:joshualara9087@gmail.com"
+            href={`mailto:${EMAIL}`}
             className="text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
           >
-            joshualara9087@gmail.com
+            {EMAIL}
           </a>
           .
         </p>

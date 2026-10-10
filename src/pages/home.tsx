@@ -3,15 +3,20 @@ import { Navigation } from "@/components/navigation";
 import { Work } from "@/components/work";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
+import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export function Home() {
+  useDocumentTitle();
+
   return (
     <>
       <Navigation />
-      <Hero />
-      <About />
-      <Work />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Work />
+        <Contact />
+      </main>
     </>
   );
 }

@@ -1,38 +1,39 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
 import {
-  motion,
+  domAnimation,
+  LazyMotion,
+  m,
   useScroll,
   useTransform,
   useMotionTemplate,
 } from "motion/react";
-import { Separator } from "@/components/ui/separator";
-import { HomeIcon, Briefcase, User, Phone } from "lucide-react";
+import { Briefcase, House, Phone, User } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { Dock, DockIcon } from "@/components/ui/dock";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Dock, DockIcon } from "@/components/ui/dock";
-import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { useActiveSection } from "@/hooks/use-active-section";
+import { cn } from "@/lib/utils";
 
-export type IconProps = React.HTMLAttributes<SVGElement>;
+const NAV_ITEMS = [
+  { id: "hero", icon: House, label: "Home" },
+  { id: "about", icon: User, label: "About" },
+  { id: "work", icon: Briefcase, label: "Work" },
+  { id: "contact", icon: Phone, label: "Contact" },
+] as const;
 
-const DATA = {
-  navbar: [
-    { href: "#hero", icon: HomeIcon, label: "Home" },
-    { href: "#about", icon: User, label: "About" },
-    { href: "#work", icon: Briefcase, label: "Work" },
-    { href: "#contact", icon: Phone, label: "Contact" },
-  ],
-};
+const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
+
+const itemClass =
+  "relative flex size-full items-center justify-center rounded-full text-muted-foreground transition-colors duration-200 hover:text-foreground";
 
 export function Navigation() {
-  const [activeSection, setActiveSection] = useState("hero");
+  const activeSection = useActiveSection(SECTION_IDS);
 
   const { scrollYProgress } = useScroll();
   const glowBlur = useTransform(scrollYProgress, [0, 1], [0, 14]);
@@ -42,103 +43,72 @@ export function Navigation() {
   const boxShadow = useMotionTemplate`0 0 ${glowBlur}px ${glowSpread}px rgba(59, 130, 246, ${glowAlpha})`;
   const borderColor = useMotionTemplate`rgba(59, 130, 246, ${glowBorder})`;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["hero", "work", "about", "contact"];
-      const current = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) setActiveSection(current);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-[max(1rem,env(safe-area-inset-top))]">
-      <div className="relative">
-        <TooltipProvider>
-          <Dock
-            direction="middle"
-            className="mt-0 min-w-0 gap-2 px-3 sm:min-w-[500px] sm:gap-10 sm:px-6"
-          >
-          {DATA.navbar.map((item) => {
-            const id = item.href.replace("#", "");
-            const isActive = activeSection === id;
+    <LazyMotion features={domAnimation} strict>
+      <nav
+        aria-label="Primary"
+        className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-[max(1rem,env(safe-area-inset-top))]"
+      >
+        <div className="relative">
+          <TooltipProvider>
+            <Dock
+              direction="middle"
+              className="mt-0 gap-2 px-3 sm:min-w-[500px] sm:gap-10 sm:px-6"
+            >
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
 
-            return (
-              <DockIcon key={item.label}>
+                return (
+                  <DockIcon key={item.id}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <a
+                          href={`#${item.id}`}
+                          aria-label={item.label}
+                          aria-current={isActive ? "location" : undefined}
+                          className={cn(
+                            itemClass,
+                            isActive && "text-foreground",
+                          )}
+                        >
+                          <item.icon aria-hidden="true" className="h-4 w-4" />
+                          <span
+                            aria-hidden="true"
+                            className={cn(
+                              "absolute bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-blue-500 transition-[opacity,scale] duration-300",
+                              isActive
+                                ? "scale-100 opacity-100"
+                                : "scale-0 opacity-0",
+                            )}
+                          />
+                        </a>
+                      </TooltipTrigger>
+                      <TooltipContent>{item.label}</TooltipContent>
+                    </Tooltip>
+                  </DockIcon>
+                );
+              })}
+
+              <Separator orientation="vertical" className="h-full" />
+
+              <DockIcon>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <a
-                      href={item.href}
-                      aria-label={item.label}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveSection(id);
-                        scrollToSection(id);
-                      }}
-                      className={cn(
-                        "flex items-center justify-center w-full h-full rounded-full relative",
-                        isActive
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:text-foreground"
-                      )}
-                    >
-                      <item.icon className="w-4 h-4" />
-                      {isActive && (
-                        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500" />
-                      )}
-                    </a>
+                    <AnimatedThemeToggler className={itemClass} />
                   </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{item.label}</p>
-                  </TooltipContent>
+                  <TooltipContent>Toggle theme</TooltipContent>
                 </Tooltip>
               </DockIcon>
-            );
-          })}
-          <Separator orientation="vertical" className="h-full" />
+            </Dock>
+          </TooltipProvider>
 
-          <DockIcon key="theme-toggler">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div
-                  className={cn(
-                    "flex items-center justify-center w-full h-full rounded-full relative text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <AnimatedThemeToggler
-                    className="flex items-center justify-center w-full h-full"
-                    aria-label="Toggle theme"
-                  />
-                </div>
-              </TooltipTrigger>
-            </Tooltip>
-          </DockIcon>
-          </Dock>
-        </TooltipProvider>
-
-        <motion.div
-          aria-hidden
-          style={{ boxShadow, borderColor }}
-          className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent"
-        />
-      </div>
-    </nav>
+          <m.div
+            aria-hidden="true"
+            style={{ boxShadow, borderColor }}
+            className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent"
+          />
+        </div>
+      </nav>
+    </LazyMotion>
   );
 }

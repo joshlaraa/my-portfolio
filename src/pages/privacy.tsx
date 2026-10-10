@@ -1,4 +1,5 @@
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
+import { EMAIL } from "@/data/portfolio";
 
 export function Privacy() {
   return (
@@ -11,10 +12,10 @@ export function Privacy() {
 
       <LegalSection heading="Information I collect">
         <p>
-          I do not ask you to create an account or submit personal information to
-          browse this site. If you choose to reach out via the email address or
-          social links provided, any information you share (such as your name and
-          email address) is used solely to respond to you.
+          I do not ask you to create an account or submit personal information
+          to browse this site. If you choose to reach out via the email address
+          or social links provided, any information you share (such as your name
+          and email address) is used solely to respond to you.
         </p>
       </LegalSection>
 
@@ -29,9 +30,9 @@ export function Privacy() {
 
       <LegalSection heading="Cookies and local storage">
         <p>
-          The only data stored in your browser is your theme preference (light or
-          dark mode), which is saved in local storage so the site remembers your
-          choice. This never leaves your device.
+          The only data stored in your browser is your theme preference (light
+          or dark mode), which is saved in local storage so the site remembers
+          your choice. This never leaves your device.
         </p>
       </LegalSection>
 
@@ -45,13 +46,13 @@ export function Privacy() {
 
       <LegalSection heading="Contact">
         <p>
-          If you have any questions about this Privacy Policy, feel free to reach
-          out at{" "}
+          If you have any questions about this Privacy Policy, feel free to
+          reach out at{" "}
           <a
-            href="mailto:joshualara9087@gmail.com"
+            href={`mailto:${EMAIL}`}
             className="text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
           >
-            joshualara9087@gmail.com
+            {EMAIL}
           </a>
           .
         </p>

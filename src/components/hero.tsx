@@ -1,58 +1,74 @@
 import { ArrowDown } from "lucide-react";
 
-const SECTIONS = ["hero", "about", "work", "contact"];
+import { ClimbingWall } from "@/components/climbing-wall";
+import { cn } from "@/lib/utils";
+
+const INTERESTS = [
+  {
+    emoji: "🧗🏽",
+    label: "Rock climber",
+    className:
+      "bg-stone-100 text-stone-700 dark:bg-stone-800/50 dark:text-stone-300",
+  },
+  {
+    emoji: "🌴",
+    label: "San Diego at heart",
+    className: "bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-300",
+  },
+  {
+    emoji: "⚾",
+    label: "Go Padres!",
+    className:
+      "bg-[#FFC425]/20 text-[#2F241D] dark:bg-[#FFC425]/10 dark:text-[#FFC425]",
+  },
+];
 
 export function Hero() {
-  const scrollToNextSection = () => {
-    const scrollPosition = window.scrollY + 100;
-    let currentIndex = 0;
-    SECTIONS.forEach((id, index) => {
-      const element = document.getElementById(id);
-      if (element && element.offsetTop <= scrollPosition) {
-        currentIndex = index;
-      }
-    });
-    const nextId = SECTIONS[Math.min(currentIndex + 1, SECTIONS.length - 1)];
-    const nextElement = document.getElementById(nextId);
-    if (!nextElement) return;
-
-    const NAV_OFFSET = -100;
-    const top =
-      nextElement.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center px-6 lg:px-12 relative overflow-hidden"
+      className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 lg:px-12"
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-blue-500/5 blur-3xl" />
       </div>
+      <ClimbingWall />
 
-      <div className="max-w-5xl mx-auto text-center space-y-8 py-32">
-        <p className="text-muted-foreground text-sm lg:text-base tracking-wide">
+      <div className="mx-auto max-w-5xl space-y-8 py-32 text-center">
+        <p className="text-sm tracking-wide text-muted-foreground lg:text-base">
           Hey there, I'm Josh Lara 👋🏽
         </p>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold text-balance leading-[1.1] tracking-tight">
+        <h1 className="text-5xl leading-[1.1] font-semibold tracking-tight text-balance md:text-7xl lg:text-8xl">
           Software Engineer
         </h1>
-        <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto text-pretty">
-          A recent graduate from California State University San Marcos, majored in
-          Software Engineering. Passionate about building applications that
+        <p className="mx-auto max-w-3xl text-lg leading-relaxed text-pretty text-muted-foreground md:text-xl lg:text-2xl">
+          Software Engineer I at Honeywell Aerospace, building applications that
           leave an impact on today's world.
         </p>
+        <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {INTERESTS.map((interest) => (
+            <li
+              key={interest.label}
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-[translate] duration-200 hover:-translate-y-0.5",
+                interest.className,
+              )}
+            >
+              <span aria-hidden="true">{interest.emoji}</span>
+              {interest.label}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <button
-        onClick={scrollToNextSection}
-        aria-label="Scroll to next section"
-        className="supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 absolute bottom-8 right-6 lg:bottom-10 lg:right-12 z-40 flex h-12 w-12 items-center justify-center rounded-2xl border text-muted-foreground backdrop-blur-md transition-all duration-300 hover:text-foreground active:scale-95"
+      <a
+        href="#about"
+        aria-label="Scroll to About section"
+        className="absolute right-6 bottom-[max(2rem,env(safe-area-inset-bottom))] z-40 flex h-12 w-12 items-center justify-center rounded-2xl border bg-background/40 text-muted-foreground backdrop-blur-md transition-[color,scale] duration-200 hover:text-foreground active:scale-95 lg:right-12 lg:bottom-10"
       >
-        <ArrowDown className="h-4 w-4" />
-      </button>
+        <ArrowDown aria-hidden="true" className="h-4 w-4" />
+      </a>
     </section>
   );
 }
